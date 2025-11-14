@@ -65,8 +65,53 @@ function generatePostsFile() {
     const fileContent = fs.readFileSync(filePath, "utf-8");
     const { metadata, content } = parseFrontMatter(fileContent);
 
-    // Parse markdown to HTML
-    const htmlContent = marked(content);
+    // Extract simple footnote definitions from the markdown and remove them
+    // Footnote lines like: [^1]: This is the footnote
+    const footnoteRegex = /^\[\^([^\]]+)\]:\s*(.+)$/gm;
+    const footnotes = [];
+    const contentWithoutFootnotes = content.replace(footnoteRegex, (match, id, txt) => {
+      footnotes.push({ id: id.trim(), text: txt.trim() });
+      return "";
+    });
+
+    // Parse markdown to HTML (without the footnote definitions)
+    let htmlContent = marked(contentWithoutFootnotes);
+
+    // Process footnote references like [^1] in the rendered HTML and append a footnotes block
+    if (footnotes.length > 0) {
+      const idToIndex = {};
+      footnotes.forEach((fn, i) => { idToIndex[fn.id] = i + 1; });
+
+      htmlContent = htmlContent.replace(/\[\^([^\]]+)\]/g, (m, id) => {
+        const idx = idToIndex[id];
+        if (!idx) return m; // leave as-is if no definition
+        return `<sup id="fnref:${id}"><a href="#fn:${id}">[${idx}]</a></sup>`;
+      });
+
+      const footnotesHtml = ['<section class="footnotes"><hr/><ol>'];
+      footnotes.forEach(fn => {
+        const idx = idToIndex[fn.id];
+        // render the footnote text as markdown so it can contain formatting
+        const rendered = marked(fn.text);
+        footnotesHtml.push(`<li id="fn:${fn.id}">${rendered.trim()} <a href="#fnref:${fn.id}" aria-label="Back to content">↩︎</a></li>`);
+      });
+      footnotesHtml.push('</ol></section>');
+      htmlContent = htmlContent + '\n' + footnotesHtml.join('\n');
+    }
+
+    // Simple emoji shortcodes substitution (common ones used here)
+    const emojiMap = {
+      rocket: '🚀',
+      sparkles: '✨',
+      smile: '😄',
+      smiley: '😄',
+      wink: '😉',
+      heart: '❤️'
+    };
+    htmlContent = htmlContent.replace(/:([a-z0-9_+-]+):/gi, (m, name) => {
+      const key = name.toLowerCase();
+      return emojiMap[key] || m;
+    });
 
     return {
       title: metadata.title || "Untitled",

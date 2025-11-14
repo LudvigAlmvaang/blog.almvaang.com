@@ -31,13 +31,42 @@ export function renderLayout(title, body) {
       <footer>
         <hr />
         <p>
-          <span style="display:inline-flex; align-items:center; gap:0.5em;">
+          <span>
             <img src="/icons/creative-commons.svg" alt="Creative Commons License" width="24" height="24">
             <span>${new Date().getFullYear()} Ludvig Almvång</span>
           </span>
         </p>
       </footer>
     </main>
+    <script>
+      (function(){
+        function setExternalLinkTargets(root){
+          root = root || document;
+          try{
+            const anchors = root.querySelectorAll ? root.querySelectorAll('a[href^="http"]') : [];
+            anchors.forEach(a => {
+              try{
+                const url = new URL(a.href, location.href);
+                if(url.origin !== location.origin){
+                  a.setAttribute('target', '_blank');
+                  a.setAttribute('rel', 'noopener noreferrer');
+                }
+              }catch(e){ /* ignore invalid URLs */ }
+            });
+          }catch(e){ /* safe no-op */ }
+        }
+
+        // Apply on initial load
+        document.addEventListener('DOMContentLoaded', function(){ setExternalLinkTargets(document); });
+
+        // Reapply after HTMX swaps (supports both htmx.onLoad and legacy events)
+        if(window.htmx && typeof htmx.onLoad === 'function'){
+          htmx.onLoad(function(elt){ setExternalLinkTargets(elt); });
+        } else {
+          document.addEventListener('htmx:afterSwap', function(e){ setExternalLinkTargets(e.detail && e.detail.elt ? e.detail.elt : document); });
+        }
+      })();
+    </script>
   </body>
 </html>`;
 }
@@ -95,8 +124,30 @@ export function renderPostContent(post) {
       <h2>${escapeHTML(post.title)}</h2>
       <p><small>${escapeHTML(post.date)}</small></p>
       ${post.content}
-      <p><a href="/" hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">← Back to Home</a></p>
+        <p><a href="/" hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">← Back to Home</a></p>
     </article>
+
+    <!-- Giscus comments -->
+    <article>
+      <div id="giscus-container">
+        <script src="https://giscus.app/client.js"
+          data-repo="LudvigAlmvaang/blog.almvaang.com"
+          data-repo-id="R_kgDOQVnD2A"
+          data-category="Comments"
+          data-category-id="DIC_kwDOQVnD2M4Cxyvx"
+          data-mapping="pathname"
+          data-strict="1"
+          data-reactions-enabled="0"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="light"
+          data-lang="en"
+          crossorigin="anonymous"
+          async>
+        </script>
+      </div>
+    </article>
+
     <script>document.title = '${escapeHTML(post.title)}';</script>
   </section>`;
 }
