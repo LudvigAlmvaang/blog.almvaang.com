@@ -1,4 +1,4 @@
 name = "blog"
 main = "src/worker.js"
 compatibility_date = "2025-11-08"
-account_id = "${CLOUDFLARE_ACCOUNT_ID}"
+account_id = "af3d06e46d3a18fea8a9427f13fc12e0"
