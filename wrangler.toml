@@ -1,0 +1,4 @@
+name = "blog"
+main = "src/worker.js"
+compatibility_date = "2025-11-08"
+account_id = "${CLOUDFLARE_ACCOUNT_ID}"

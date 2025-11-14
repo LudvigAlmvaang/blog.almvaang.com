@@ -1,0 +1,19 @@
+# Node dependencies
+node_modules/
+
+# Wrangler
+.wrangler/
+dist/
+build/
+
+# Environment variables (local secrets)
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
