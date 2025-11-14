@@ -12,6 +12,8 @@ export function renderLayout(title, body) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark">
+    <meta property="og:title" content="Ludvig's Blog" />
+    <meta property="og:description" content="A variety blog by Ludvig Almvång covering personal events, litterature, video games and technology" />
     <title>${escapeHTML(title)}</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css" type="text/css">
@@ -30,12 +32,12 @@ export function renderLayout(title, body) {
       ${body}
       <footer>
         <hr />
-        <p>
-          <span>
-            <img src="/icons/creative-commons.svg" alt="Creative Commons License" width="24" height="24">
-            <span>${new Date().getFullYear()} Ludvig Almvång</span>
-          </span>
-        </p>
+          <p>
+            <img src="/icons/creative-commons.svg" alt="Creative Commons License" width="18" height="18">
+            <small>${new Date().getFullYear()} Ludvig S.W. Almvång</small>
+            <small>–</small>
+            <small>Code licensed MIT, content CC BY-NC-ND 4.0</small>
+          </p>
       </footer>
     </main>
     <script>
@@ -106,9 +108,8 @@ export function renderAboutContent() {
   return `<section id="content">
     <article>
       <h2>About This Blog</h2>
-      <p>Hello!</p>
-      <p>My name is Ludvig and I'm the author of this blog.</p>
-      <p>It's built with <strong>Cloudflare Workers</strong> for serverless hosting, <strong>HTMX</strong> for seamless navigation, and <strong>PicoCSS</strong> for semantic and classless styling.</p>
+      <p>This blog is powered by <strong>Cloudflare Workers</strong> (serverless backend), <strong>HTMX</strong> (dynamic navigation), <strong>Giscus</strong> (comments via GitHub Discussions), <strong>Marked</strong> (Markdown parsing), and <strong>PicoCSS</strong> (semantic, classless styling).</p>
+      <p>It is a modern, minimal, and open-source web application designed for fast iteration and learning.</p>
       <p><a href="/" hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">← Back to Home</a></p>
     </article>
     <script>document.title = 'About';</script>
@@ -121,10 +122,14 @@ export function renderAboutContent() {
 export function renderPostContent(post) {
   return `<section id="content">
     <article>
-      <h2>${escapeHTML(post.title)}</h2>
-      <p><small>${escapeHTML(post.date)}</small></p>
+      <header>
+        <h2>${escapeHTML(post.title)}</h2>
+        <p><small>${escapeHTML(post.date)}</small></p>
+      </header>
       ${post.content}
+      <footer>
         <p><a href="/" hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">← Back to Home</a></p>
+      </footer>
     </article>
 
     <!-- Giscus comments -->

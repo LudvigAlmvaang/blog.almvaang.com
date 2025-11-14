@@ -12,4 +12,3 @@ export function parseMarkdown(content) {
   console.warn("parseMarkdown is deprecated - markdown is parsed at build time");
   return {};
 }
-
