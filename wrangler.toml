@@ -2,3 +2,12 @@ name = "blog"
 main = "src/worker.js"
 compatibility_date = "2025-11-08"
 account_id = "af3d06e46d3a18fea8a9427f13fc12e0"
+
+# Serve static assets from the public directory
+[assets]
+directory = "public"
+
+[env.production]
+routes = [
+  { pattern = "blog.almvaang.com/*", zone_name = "almvaang.com" }
+]

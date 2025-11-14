@@ -4,8 +4,12 @@
   "description": "Personal blog running on Cloudflare Workers",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "build:posts": "node scripts/build-posts.js",
+    "dev": "npm run build:posts && wrangler dev",
+    "deploy": "npm run build:posts && wrangler deploy"
+  },
+  "dependencies": {
+    "marked": "^12.0.0"
   },
   "devDependencies": {
     "wrangler": "^3.0.0"
