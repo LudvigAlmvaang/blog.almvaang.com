@@ -35,8 +35,7 @@ export function renderLayout(title, body) {
           <p>
             <img src="/icons/creative-commons.svg" alt="Creative Commons License" width="18" height="18">
             <small>${new Date().getFullYear()} Ludvig S.W. Almvång</small>
-            <small>–</small>
-            <small>Code licensed MIT, content CC BY-NC-ND 4.0</small>
+            <p><small>Code licensed MIT, content CC BY-NC-ND 4.0</small></p>
           </p>
       </footer>
     </main>
@@ -152,6 +151,9 @@ export function renderPostContent(post) {
           crossorigin="anonymous"
           async>
         </script>
+        <noscript>
+          <small>This comment section is powered by <a href="https://giscus.app/">giscus</a>, and therefore won't work without JavaScript enabled on your browser.</small>
+        </noscript>
       </div>
     </article>
 
