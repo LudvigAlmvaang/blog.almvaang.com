@@ -120,12 +120,14 @@ export function renderAboutContent() {
  * Render individual blog post
  */
 export function renderPostContent(post) {
+  const dateDisplay = post.updated 
+    ? `<p><small>Published ${escapeHTML(post.date)}<br>Updated ${escapeHTML(post.updated)}</small></p>`
+    : `<p><small>Published ${escapeHTML(post.date)}</small></p>`;
+  
   return `<section id="content">
     <article>
-      <header>
         <h2>${escapeHTML(post.title)}</h2>
-        <p><small>${escapeHTML(post.date)}</small></p>
-      </header>
+        ${dateDisplay}
       ${post.content}
       <footer>
         <p><a href="/" hx-get="/" hx-target="#content" hx-swap="outerHTML" hx-push-url="true">← Back to Home</a></p>
@@ -142,7 +144,7 @@ export function renderPostContent(post) {
           data-category-id="DIC_kwDOQVnD2M4Cxyvx"
           data-mapping="pathname"
           data-strict="1"
-          data-reactions-enabled="0"
+          data-reactions-enabled="1"
           data-emit-metadata="0"
           data-input-position="bottom"
           data-theme="light"

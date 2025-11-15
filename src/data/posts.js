@@ -8,6 +8,7 @@
  * title: Your Post Title
  * date: YYYY-MM-DD
  * slug: your-post-slug
+ * updated: YYYY-MM-DD (optional)
  * ---
  * 
  * Your markdown content here...
@@ -15,21 +16,9 @@
 
   export const posts = [
   {
-    "title": "All Markdown Features",
-    "date": "2025-11-14",
-    "slug": "all-markdown-features",
-    "content": "<h1>All Markdown Features</h1>\n<p>This post demonstrates almost every Markdown feature supported by the site (GFM-enabled).</p>\n<h2>Text formatting</h2>\n<p>This is <em>italic</em>, this is <strong>bold</strong>, this is <em><strong>bold italic</strong></em>, and this is <del>strikethrough</del>.</p>\n<p>Inline code: <code>const x = 42;</code> and a code span with backticks <code>`not code`</code>.</p>\n<h2>Links</h2>\n<ul>\n<li>External link: <a href=\"https://htmx.org/\">https://htmx.org/</a></li>\n<li>Explicit external link: <a href=\"https://htmx.org/\">HTMX website</a></li>\n<li>Internal link to a post: <a href=\"/post/hello-world\">Hello World</a></li>\n</ul>\n<p>Reference-style link: <a href=\"https://picocss.com\" title=\"PicoCSS - Minimal CSS Framework\">PicoCSS</a></p>\n<h2>Images</h2>\n<p>Inline image:</p>\n<p><img src=\"https://picocss.com/logo.svg\" alt=\"PicoCSS logo\" title=\"PicoCSS Logo\"></p>\n<p>HTML image (raw):</p>\n<img src=\"/icons/creative-commons.svg\" alt=\"Creative Commons\" width=\"48\">\n\n<h2>Lists</h2>\n<p>Ordered list:</p>\n<ol>\n<li>First</li>\n<li>Second<ol>\n<li>Nested first</li>\n<li>Nested second</li>\n</ol>\n</li>\n<li>Third</li>\n</ol>\n<p>Unordered list:</p>\n<ul>\n<li>Alpha</li>\n<li>Beta<ul>\n<li>Beta child</li>\n<li>Beta child 2</li>\n</ul>\n</li>\n</ul>\n<p>Task list:</p>\n<ul>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> Write example</li>\n<li><input disabled=\"\" type=\"checkbox\"> Add more tests</li>\n<li><input disabled=\"\" type=\"checkbox\"> Publish</li>\n</ul>\n<h2>Tables</h2>\n<table>\n<thead>\n<tr>\n<th>Name</th>\n<th>Description</th>\n<th>Notes</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>HTMX</td>\n<td>AJAX for the modern web</td>\n<td><a href=\"https://htmx.org/\">https://htmx.org/</a></td>\n</tr>\n<tr>\n<td>PicoCSS</td>\n<td>Minimal CSS framework</td>\n<td><a href=\"https://picocss.com/\">https://picocss.com/</a></td>\n</tr>\n</tbody></table>\n<h2>Code blocks</h2>\n<p>Fenced JavaScript:</p>\n<pre><code class=\"language-javascript\">// Example function\nfunction greet(name) {\n  return `Hello, ${name}!`;\n}\nconsole.log(greet(&#39;World&#39;));\n</code></pre>\n<p>Fenced shell:</p>\n<pre><code class=\"language-bash\"># install deps\nnpm install\n</code></pre>\n<p>Indented code block:</p>\n<pre><code>line one\nline two\n</code></pre>\n<h2>Blockquote</h2>\n<blockquote>\n<p>This is a blockquote. Nested:</p>\n<blockquote>\n<p>A nested quote.</p>\n</blockquote>\n</blockquote>\n<h2>Horizontal rule</h2>\n<hr>\n<h2>Definition list (HTML)</h2>\n<dl>\n  <dt>HTML term</dt>\n  <dd>Definition of the term in HTML (not standard Markdown but supported by browsers).</dd>\n</dl>\n\n<h2>Emoji and special chars</h2>\n<p>Emoji: 🚀 ✨ 😄</p>\n<h2>Autolinks and angle-bracket links</h2>\n<p>Autolink: <a href=\"https://example.com\">https://example.com</a></p>\n<h2>Raw HTML block</h2>\n<div style=\"border:1px dashed #ccc; padding:8px;\">\n  <strong>Note:</strong> This is raw HTML inside the markdown.\n</div>\n\n<h2>Footnotes</h2>\n<p>Markdown footnote example<sup id=\"fnref:1\"><a href=\"#fn:1\">[1]</a></sup>.</p>\n<h2>Conclusion</h2>\n<p>That&#39;s it — a comprehensive test post with most Markdown features.</p>\n\n<section class=\"footnotes\"><hr/><ol>\n<li id=\"fn:1\"><p>This is the footnote content.</p> <a href=\"#fnref:1\" aria-label=\"Back to content\">↩︎</a></li>\n</ol></section>"
-  },
-  {
-    "title": "Lorem Ipsum",
-    "date": "2025-11-09",
-    "slug": "lorem-ipsum",
-    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n<p>Donec finibus quam quis eros auctor tempor.</p>\n<p>Donec at lacus nec arcu accumsan bibendum ac sed orci.</p>\n<p>Aliquam accumsan dolor id magna accumsan, quis scelerisque dolor blandit.</p>\n<p>Fusce cursus bibendum consequat. Curabitur sem nisi, vehicula ac dapibus quis, suscipit eget felis.</p>\n<p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>\n<p>Mauris eu quam in lacus ullamcorper mattis non in turpis.</p>\n<p>Curabitur ac viverra enim.</p>\n<p>Donec pulvinar vitae tellus a fermentum.</p>\n<p>Fusce volutpat porttitor est, vel tincidunt felis feugiat sed.</p>\n"
-  },
-  {
-    "title": "Hello World",
-    "date": "2025-11-08",
+    "title": "Hello World!",
+    "date": "2025-11-15",
     "slug": "hello-world",
-    "content": "<p>Welcome to my first post! This blog uses <a href=\"https://htmx.org/\">HTML</a> for smooth navigation and <a href=\"https://picocss.com\">PicoCSS</a> for styling.</p>\n<p>Everything runs on <strong>Cloudflare Workers</strong>.</p>\n<h2>Features</h2>\n<ul>\n<li>🚀 Markdown support (with full HTML rendering)</li>\n<li>🎨 Images, links, and formatting</li>\n<li>⚡ Powered by Cloudflare Workers</li>\n<li>📱 Responsive design with PicoCSS</li>\n</ul>\n"
+    "content": "<p>This will be the first in a series of blog posts — or at least that’s the plan.<br>I’ve spent the last few days putting in a handful of hours here and there to get this blog application up and running.</p>\n<p>It might seem a bit silly not to just use WordPress, Jekyll, Hugo, or one of the many other ready-made options out there. But I usually prefer doing things my own way, even if it takes a bit more time. Luckily, with all the recent progress in AI coding assistants, it didn’t actually take that long to piece everything together.</p>\n<p>If anyone&#39;s curious, I&#39;m sure I&#39;ll share more details about how I built the blog on the <a href=\"/about\">About page</a>, or you can check out the <a href=\"https://github.com/LudvigAlmvaang/blog.almvaang.com\">GitHub repo</a>.</p>\n<p>I already have a few ideas lined up for posts in the near future, so it probably won&#39;t be long before the next one shows up.</p>\n"
   }
 ];

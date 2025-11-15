@@ -113,12 +113,19 @@ function generatePostsFile() {
       return emojiMap[key] || m;
     });
 
-    return {
+    const post = {
       title: metadata.title || "Untitled",
       date: metadata.date || new Date().toISOString().split("T")[0],
       slug: metadata.slug || file.replace(".md", ""),
       content: htmlContent,
     };
+
+    // Add optional updated field if present
+    if (metadata.updated) {
+      post.updated = metadata.updated;
+    }
+
+    return post;
   });
 
   // Sort by date (newest first)
@@ -136,6 +143,7 @@ function generatePostsFile() {
  * title: Your Post Title
  * date: YYYY-MM-DD
  * slug: your-post-slug
+ * updated: YYYY-MM-DD (optional)
  * ---
  * 
  * Your markdown content here...
